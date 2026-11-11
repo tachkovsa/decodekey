@@ -35,7 +35,7 @@ a:hover { text-decoration: underline; }
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 0;
   font-weight: 700;
   font-size: 19px;
   color: #fff;
@@ -43,8 +43,8 @@ a:hover { text-decoration: underline; }
 }
 .logo::before {
   content: "";
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   background: url("/logo.svg") center / contain no-repeat;
   box-shadow: 0 4px 14px rgba(26, 16, 48, .35);
   border-radius: 9px;
