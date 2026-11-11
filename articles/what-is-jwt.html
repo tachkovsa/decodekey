@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What is a JWT and what is inside it — DecodeKey</title>
+  <meta name="description" content="A short practical explanation of JSON Web Tokens: header, payload, signature, and why decoding is not verification.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/">Decode<span>Key</span></a>
+    <nav><a href="/#tools">Tools</a><a href="/articles/what-is-jwt.html">Articles</a><a href="/about.html">About</a></nav>
+  </header>
+  <main>
+    <article class="page">
+      <h1>What is a JWT and what is inside it</h1>
+      <p class="meta">November 2026 · 4 min read</p>
+      <p>A JSON Web Token is three Base64URL-encoded parts joined by dots: <code>header.payload.signature</code>. It is a compact way to carry claims between parties, and it is everywhere in modern APIs.</p>
+      <h2>Header</h2>
+      <p>The header is a small JSON object. It names the signing algorithm and the token type:</p>
+      <pre><code>{"alg":"HS256","typ":"JWT"}</code></pre>
+      <p>The <code>alg</code> field matters. If a server trusts the algorithm from the token instead of enforcing its own, an attacker can try <code>"alg":"none"</code> or swap RS256 for HS256. This class of bug is old and still appears in the wild.</p>
+      <h2>Payload</h2>
+      <p>The payload holds claims: who the token is about, who issued it, when it expires. Registered names are short: <code>sub</code>, <code>iss</code>, <code>exp</code>, <code>iat</code>, <code>aud</code>.</p>
+      <p>Two things surprise people. First, the payload is <strong>not encrypted</strong> — anyone holding the token can read it. Second, <code>exp</code> is a Unix timestamp and must be checked by the server; the token will not expire by itself.</p>
+      <h2>Signature</h2>
+      <p>The signature protects integrity, not confidentiality. It proves the token was produced by someone with the key, and that the header and payload were not modified. It says nothing about whether the claims are true.</p>
+      <h2>Decoding is not verification</h2>
+      <p>Our <a href="/#tools">JWT tool</a> decodes the header and payload in your browser. That is useful for debugging, and dangerous if you treat the result as trusted. A valid-looking token with a payload you like is still just a string until the signature is verified with the right key, and the claims are checked: issuer, audience, expiry, and the algorithm.</p>
+      <h2>Practical checklist</h2>
+      <ul>
+        <li>Never put secrets or personal data in a payload.</li>
+        <li>Enforce the algorithm server-side; do not read it from the token.</li>
+        <li>Verify <code>exp</code>, <code>iss</code> and <code>aud</code>.</li>
+        <li>Keep tokens short-lived; refresh with a separate mechanism.</li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <span>© 2026 DecodeKey</span>
+    <nav><a href="/about.html">About</a><a href="/privacy.html">Privacy</a></nav>
+  </footer>
+</body>
+</html>

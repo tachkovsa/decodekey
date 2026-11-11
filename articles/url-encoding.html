@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Percent-encoding without surprises — DecodeKey</title>
+  <meta name="description" content="How URL encoding works, why spaces become %20 or +, and which characters are safe in query strings and paths.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/">Decode<span>Key</span></a>
+    <nav><a href="/#tools">Tools</a><a href="/articles/what-is-jwt.html">Articles</a><a href="/about.html">About</a></nav>
+  </header>
+  <main>
+    <article class="page">
+      <h1>Percent-encoding without surprises</h1>
+      <p class="meta">November 2026 · 3 min read</p>
+      <p>URLs are text, but not every character is allowed in every position. Percent-encoding replaces unsafe bytes with <code>%</code> and two hex digits: a space becomes <code>%20</code>, a slash inside a query value becomes <code>%2F</code>, and so on.</p>
+      <h2>Path versus query</h2>
+      <p>The rules differ by component. In a path, <code>/</code> separates segments and must be encoded if it is part of a value. In a query string, <code>&amp;</code> and <code>=</code> are separators and must be encoded inside values. Encoding a whole URL with one function is a common source of broken links.</p>
+      <h2>Space: %20 or +?</h2>
+      <p>In query strings, <code>+</code> traditionally means a space — that comes from HTML form encoding. In paths, <code>+</code> is a literal plus. Modern code should prefer <code>%20</code> everywhere and treat <code>+</code> as a space only when parsing form-encoded bodies.</p>
+      <h2>Double encoding</h2>
+      <p>Encode once, at the moment the value becomes part of a URL. If a proxy, a template engine and a client library each encode the same value, <code>%20</code> becomes <code>%2520</code> and the server sees a literal <code>%20</code>. When a URL looks wrong, decode it step by step and count the layers.</p>
+      <h2>Unicode</h2>
+      <p>Non-ASCII characters are encoded as UTF-8 bytes, then percent-escaped: <code>привет</code> becomes <code>%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82</code>. If the receiving side assumes a different charset, the text turns into mojibake — the classic symptom of a missing <code>charset=utf-8</code>.</p>
+      <p>Use the <a href="/#tools">URL tool</a> to encode and decode values while debugging; it uses the same rules as <code>encodeURIComponent</code> in JavaScript.</p>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <span>© 2026 DecodeKey</span>
+    <nav><a href="/about.html">About</a><a href="/privacy.html">Privacy</a></nav>
+  </footer>
+</body>
+</html>

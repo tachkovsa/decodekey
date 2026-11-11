@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Base64 is not encryption — DecodeKey</title>
+  <meta name="description" content="Why Base64 looks like a secret but is just an encoding, and where it actually belongs.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/">Decode<span>Key</span></a>
+    <nav><a href="/#tools">Tools</a><a href="/articles/what-is-jwt.html">Articles</a><a href="/about.html">About</a></nav>
+  </header>
+  <main>
+    <article class="page">
+      <h1>Base64 is not encryption</h1>
+      <p class="meta">November 2026 · 3 min read</p>
+      <p>Base64 turns arbitrary bytes into a string of letters, digits, <code>+</code>, <code>/</code> and padding. It exists so binary data can travel through text-only channels: JSON, email headers, URLs, config files.</p>
+      <h2>It is reversible by design</h2>
+      <p>There is no key and no secret. Anyone who sees a Base64 string can decode it in one step — including our <a href="/#tools">Base64 tool</a>. That is the point: encoding is not protection.</p>
+      <pre><code>echo 'c2VjcmV0' | base64 -d
+secret</code></pre>
+      <h2>Where the confusion comes from</h2>
+      <p>Encoded strings look opaque. People paste them into tickets, logs and chat, assuming they are safe because they are unreadable at a glance. They are not: credentials, tokens and personal data encoded this way leak exactly as if they were plain text.</p>
+      <h2>URL-safe variant</h2>
+      <p>Standard Base64 uses <code>+</code> and <code>/</code>, which have meaning in URLs. JWT and many APIs use the URL-safe alphabet instead: <code>-</code> and <code>_</code>, usually without padding. That is why a token segment can look slightly different from a regular Base64 blob.</p>
+      <h2>What to use instead</h2>
+      <ul>
+        <li>For confidentiality: real encryption (AES-GCM, ChaCha20-Poly1305) with keys stored outside the data.</li>
+        <li>For integrity: signatures or MACs, verified on the server.</li>
+        <li>For transport: Base64 is fine — just do not call it security.</li>
+      </ul>
+      <p>A useful rule: if you would not paste the raw value into a public chat, do not paste its Base64 either.</p>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <span>© 2026 DecodeKey</span>
+    <nav><a href="/about.html">About</a><a href="/privacy.html">Privacy</a></nav>
+  </footer>
+</body>
+</html>
