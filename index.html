@@ -20,8 +20,8 @@
 
   <main>
     <section class="hero">
-      <h1>Developer toolbox</h1>
-      <p class="lead">Decode tokens, strings and payloads right in your browser. No uploads, no logs, no tracking.</p>
+      <h1>JWT Decoder</h1>
+      <p class="lead">Paste a JSON Web Token to inspect its header and payload instantly</p>
     </section>
 
     <section id="tools" class="tools">
@@ -35,13 +35,14 @@
       </div>
 
       <div class="panel active" id="panel-jwt">
-        <p class="hint">Paste a JSON Web Token to inspect its header and payload. Signature is <strong>not</strong> verified.</p>
+        <p class="label">Encoded token</p>
         <textarea id="jwt-in" rows="5" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0In0.signature"></textarea>
         <div class="actions">
           <button class="btn primary" id="jwt-decode">Decode</button>
           <button class="btn" id="jwt-clear">Clear</button>
           <button class="btn" id="jwt-copy">Copy result</button>
         </div>
+        <p class="label">Decoded JSON</p>
         <div class="result-grid">
           <div><h3>Header</h3><pre id="jwt-header">—</pre></div>
           <div><h3>Payload</h3><pre id="jwt-payload">—</pre></div>
