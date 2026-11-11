@@ -45,9 +45,9 @@ a:hover { text-decoration: underline; }
   content: "";
   width: 30px;
   height: 30px;
-  border-radius: 9px;
-  background: #1a1030 url("/favicon.svg") center / 20px 20px no-repeat;
+  background: url("/logo.svg") center / contain no-repeat;
   box-shadow: 0 4px 14px rgba(26, 16, 48, .35);
+  border-radius: 9px;
 }
 .logo span { color: #e7ddff; }
 
