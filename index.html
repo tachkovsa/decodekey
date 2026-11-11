@@ -36,76 +36,141 @@
 
       <div class="panel active" id="panel-jwt">
         <p class="label">Encoded token</p>
-        <textarea id="jwt-in" rows="5" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0In0.signature"></textarea>
+        <div class="box">
+          <textarea id="jwt-in" rows="5" placeholder="eyJhbG...ture"></textarea>
+          <button class="copy" data-copy="jwt-in" aria-label="Copy token">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <div class="actions">
           <button class="btn primary" id="jwt-decode">Decode</button>
           <button class="btn" id="jwt-clear">Clear</button>
-          <button class="btn" id="jwt-copy">Copy result</button>
         </div>
         <p class="label">Decoded JSON</p>
         <div class="result-grid">
-          <div><h3>Header</h3><pre id="jwt-header">—</pre></div>
-          <div><h3>Payload</h3><pre id="jwt-payload">—</pre></div>
+          <div>
+            <h3>Header</h3>
+            <div class="box">
+              <pre id="jwt-header">—</pre>
+              <button class="copy" data-copy="jwt-header" aria-label="Copy header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <h3>Payload</h3>
+            <div class="box">
+              <pre id="jwt-payload">—</pre>
+              <button class="copy" data-copy="jwt-payload" aria-label="Copy payload">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
         <p class="error" id="jwt-error"></p>
       </div>
 
       <div class="panel" id="panel-base64">
         <p class="hint">UTF-8 safe Base64. Works with JSON, tokens and binary-looking strings.</p>
-        <textarea id="b64-in" rows="5" placeholder="Text or Base64…"></textarea>
+        <div class="box">
+          <textarea id="b64-in" rows="5" placeholder="Text or Base64…"></textarea>
+          <button class="copy" data-copy="b64-in" aria-label="Copy input">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <div class="actions">
           <button class="btn primary" id="b64-encode">Encode</button>
           <button class="btn" id="b64-decode">Decode</button>
-          <button class="btn" id="b64-copy">Copy result</button>
         </div>
-        <textarea id="b64-out" rows="5" readonly placeholder="Result…"></textarea>
+        <div class="box">
+          <textarea id="b64-out" rows="5" readonly placeholder="Result…"></textarea>
+          <button class="copy" data-copy="b64-out" aria-label="Copy result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <p class="error" id="b64-error"></p>
       </div>
 
       <div class="panel" id="panel-url">
         <p class="hint">Percent-encoding for query strings and paths.</p>
-        <textarea id="url-in" rows="5" placeholder="hello world / привет"></textarea>
+        <div class="box">
+          <textarea id="url-in" rows="5" placeholder="hello world / привет"></textarea>
+          <button class="copy" data-copy="url-in" aria-label="Copy input">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <div class="actions">
           <button class="btn primary" id="url-encode">Encode</button>
           <button class="btn" id="url-decode">Decode</button>
-          <button class="btn" id="url-copy">Copy result</button>
         </div>
-        <textarea id="url-out" rows="5" readonly placeholder="Result…"></textarea>
+        <div class="box">
+          <textarea id="url-out" rows="5" readonly placeholder="Result…"></textarea>
+          <button class="copy" data-copy="url-out" aria-label="Copy result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <p class="error" id="url-error"></p>
       </div>
 
       <div class="panel" id="panel-hex">
         <p class="hint">Text to hex bytes and back (UTF-8).</p>
-        <textarea id="hex-in" rows="5" placeholder="Hello / 48 65 6c 6c 6f"></textarea>
+        <div class="box">
+          <textarea id="hex-in" rows="5" placeholder="Hello / 48 65 6c 6c 6f"></textarea>
+          <button class="copy" data-copy="hex-in" aria-label="Copy input">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <div class="actions">
           <button class="btn primary" id="hex-encode">To hex</button>
           <button class="btn" id="hex-decode">From hex</button>
-          <button class="btn" id="hex-copy">Copy result</button>
         </div>
-        <textarea id="hex-out" rows="5" readonly placeholder="Result…"></textarea>
+        <div class="box">
+          <textarea id="hex-out" rows="5" readonly placeholder="Result…"></textarea>
+          <button class="copy" data-copy="hex-out" aria-label="Copy result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <p class="error" id="hex-error"></p>
       </div>
 
       <div class="panel" id="panel-html">
         <p class="hint">Escape markup before inserting user input into HTML.</p>
-        <textarea id="html-in" rows="5" placeholder="<b>Hi &amp; welcome</b>"></textarea>
+        <div class="box">
+          <textarea id="html-in" rows="5" placeholder="<b>Hi &amp; welcome</b>"></textarea>
+          <button class="copy" data-copy="html-in" aria-label="Copy input">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <div class="actions">
           <button class="btn primary" id="html-encode">Escape</button>
           <button class="btn" id="html-decode">Unescape</button>
-          <button class="btn" id="html-copy">Copy result</button>
         </div>
-        <textarea id="html-out" rows="5" readonly placeholder="Result…"></textarea>
+        <div class="box">
+          <textarea id="html-out" rows="5" readonly placeholder="Result…"></textarea>
+          <button class="copy" data-copy="html-out" aria-label="Copy result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
       </div>
 
       <div class="panel" id="panel-json">
         <p class="hint">Format or minify JSON. Errors point to the exact position.</p>
-        <textarea id="json-in" rows="6" placeholder='{"b":2,"a":[1,2,3]}'></textarea>
+        <div class="box">
+          <textarea id="json-in" rows="6" placeholder='{"b":2,"a":[1,2,3]}'></textarea>
+          <button class="copy" data-copy="json-in" aria-label="Copy input">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <div class="actions">
           <button class="btn primary" id="json-format">Format</button>
           <button class="btn" id="json-minify">Minify</button>
-          <button class="btn" id="json-copy">Copy result</button>
         </div>
-        <textarea id="json-out" rows="6" readonly placeholder="Result…"></textarea>
+        <div class="box">
+          <textarea id="json-out" rows="6" readonly placeholder="Result…"></textarea>
+          <button class="copy" data-copy="json-out" aria-label="Copy result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </button>
+        </div>
         <p class="error" id="json-error"></p>
       </div>
     </section>

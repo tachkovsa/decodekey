@@ -40,7 +40,7 @@
     $(id).textContent = message || "";
   };
 
-  const copyFrom = async (elId) => {
+  const copyFrom = async (elId, btn) => {
     const el = $(elId);
     const text = el.value !== undefined ? el.value : el.textContent;
     try {
@@ -52,6 +52,10 @@
       ta.select();
       document.execCommand("copy");
       ta.remove();
+    }
+    if (btn) {
+      btn.classList.add("copied");
+      setTimeout(() => btn.classList.remove("copied"), 1200);
     }
   };
 
@@ -86,11 +90,6 @@
     $("jwt-payload").textContent = "—";
     setError("jwt-error", "");
   });
-  $("jwt-copy").addEventListener("click", () =>
-    navigator.clipboard.writeText(
-      "HEADER\n" + $("jwt-header").textContent + "\n\nPAYLOAD\n" + $("jwt-payload").textContent
-    )
-  );
 
   /* ---------- Base64 ---------- */
   $("b64-encode").addEventListener("click", () => {
@@ -109,7 +108,6 @@
       setError("b64-error", "Not valid Base64.");
     }
   });
-  $("b64-copy").addEventListener("click", () => copyFrom("b64-out"));
 
   /* ---------- URL ---------- */
   $("url-encode").addEventListener("click", () => {
@@ -124,7 +122,6 @@
       setError("url-error", "Malformed percent-encoding.");
     }
   });
-  $("url-copy").addEventListener("click", () => copyFrom("url-out"));
 
   /* ---------- Hex ---------- */
   $("hex-encode").addEventListener("click", () => {
@@ -145,7 +142,6 @@
     for (let i = 0; i < bytes.length; i++) bytes[i] = parseInt(clean.substr(i * 2, 2), 16);
     $("hex-out").value = utf8Decode(bytes);
   });
-  $("hex-copy").addEventListener("click", () => copyFrom("hex-out"));
 
   /* ---------- HTML entities ---------- */
   const escapeHtml = (s) =>
@@ -161,7 +157,6 @@
   $("html-decode").addEventListener("click", () => {
     $("html-out").value = unescapeHtml($("html-in").value);
   });
-  $("html-copy").addEventListener("click", () => copyFrom("html-out"));
 
   /* ---------- JSON ---------- */
   $("json-format").addEventListener("click", () => {
@@ -180,5 +175,8 @@
       setError("json-error", e.message);
     }
   });
-  $("json-copy").addEventListener("click", () => copyFrom("json-out"));
+
+  document.querySelectorAll(".copy").forEach((btn) => {
+    btn.addEventListener("click", () => copyFrom(btn.dataset.copy, btn));
+  });
 })();

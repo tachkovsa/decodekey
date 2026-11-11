@@ -110,6 +110,28 @@ main {
 
 .hint { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
 
+.box { position: relative; }
+.box textarea, .box pre { padding-right: 46px; }
+
+.copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid var(--field-border);
+  border-radius: 8px;
+  color: #5b5b72;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+}
+.copy:hover { color: var(--accent); border-color: var(--accent); }
+.copy.copied { color: #2e9e6b; border-color: #2e9e6b; }
+.copy svg { width: 16px; height: 16px; }
+
 textarea {
   width: 100%;
   background: var(--field);
